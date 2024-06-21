@@ -148,54 +148,56 @@
           fetch("https://projectdatabaseforimdb.onrender.com/comments")
             .then((value) => value.json())
             .then((result) => {
+              var resultValue = 0;
               for (objArr of result) {
                 if (username == objArr.username) {
-                  messageDiv.innerHTML =
-                    "Username already Exists ! ! !";
-                  messageDiv.style.color = "red";
+                  resultValue++;
                   break;
-                } else {
-                  if (password === confirm) {
-                    fetch(
-                      "https://projectdatabaseforimdb.onrender.com/comments",
-                      {
-                        method: "POST",
-                        headers: {
-                          "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                          username: username,
-                          password: password,
-                        }),
+                }
+              }
+              if (resultValue != 0) {
+                messageDiv.innerHTML = "Username already Exists ! ! !";
+                messageDiv.style.color = "red";
+              } else {
+                if (password === confirm) {
+                  fetch(
+                    "https://projectdatabaseforimdb.onrender.com/comments",
+                    {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        username: username,
+                        password: password,
+                      }),
+                    }
+                  )
+                    .then((response) => {
+                      if (response.ok) {
+                        return response.json();
+                      } else {
+                        throw new Error("Failed to create account");
                       }
-                    )
-                      .then((response) => {
-                        if (response.ok) {
-                          return response.json();
-                        } else {
-                          throw new Error("Failed to create account");
-                        }
-                      })
-                      .then((data) => {
-                        // Handle success response
-                        messageDiv.innerHTML = "Account created successfully!";
-                        messageDiv.style.color = "green";
-                        setTimeout(() => {
-                          window.open("./login.html", "_self");
-                        }, 1000);
-                      })
-                      .catch((error) => {
-                        console.error("Error:", error);
-                        messageDiv.innerText =
-                          "An error occurred. Please try again.";
-                        messageDiv.style.color = "red";
-                      });
-                  } else {
-                    messageDiv.innerHTML =
-                      "Passwords do not match. Please try again.";
-                    messageDiv.style.color = "red";
-                                      break;
-                  }
+                    })
+                    .then((data) => {
+                      // Handle success response
+                      messageDiv.innerHTML = "Account created successfully!";
+                      messageDiv.style.color = "green";
+                      setTimeout(() => {
+                        window.open("./login.html", "_self");
+                      }, 1000);
+                    })
+                    .catch((error) => {
+                      console.error("Error:", error);
+                      messageDiv.innerText =
+                        "An error occurred. Please try again.";
+                      messageDiv.style.color = "red";
+                    });
+                } else {
+                  messageDiv.innerHTML =
+                    "Passwords do not match. Please try again.";
+                  messageDiv.style.color = "red";
                 }
               }
             });
