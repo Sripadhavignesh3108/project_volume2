@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IMDB-Create Account</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Jacquard+12&display=swap");
+      body {
+        background-image: url("https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/d63680108289407.5fbab69cdf6ec.jpg");
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: "Cantarell", sans-serif;
+        color: white;
+      }
+
+      .login-container {
+        background-color: transparent;
+        padding: 30px;
+        border-radius: 8px;
+        width: 250px;
+        backdrop-filter: blur(3px);
+        height: 380px;
+        border: 1px solid rgb(255, 255, 255);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        text-align: center;
+        display: inline;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        font-size: 15px;
+        width: 90%;
+        height: 15px;
+        padding: 8px;
+        margin: -5px 0px -5px 0px;
+        border-left: 6px solid #ffb700;
+        border-top: 0px;
+        border-right: none;
+        border-bottom: none;
+        border-radius: 4px;
+        border-top-left-radius: 1px;
+        border-bottom-left-radius: 1px;
+        background-color: #c7c7c756;
+        outline: none;
+        color: white;
+      }
+
+      input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 15px;
+        background-color: #ffbb00;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 15px;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #0056b3;
+      }
+
+      #message {
+        /* margin-top: 0px; */
+        text-align: center;
+      }
+      #newAccount {
+        display: block;
+        text-align: center;
+        font-size: 17px;
+        color: #2da0ff;
+        text-decoration: none;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <div
+        style="
+          margin-bottom: 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 10px;
+        "
+      >
+        <img src="./logo.png" style="width: 45px" />
+        <h2>Create Account</h2>
+      </div>
+      <form id="loginForm">
+        <label for="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          required
+          minlength="10"
+          maxlength="20"
+          autofocus
+        /><br /><br />
+        <label for="password">New Password :</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          minlength="8"
+          required
+        /><br /><br />
+        <label for="confirm">Confirm Password :</label>
+        <input
+          type="password"
+          id="confirm"
+          name="confirm"
+          required
+        /><br /><br />
+        <div id="message"></div>
+        <input type="submit" value="Submit" />
+      </form>
+      <a href="./login.html" id="newAccount">Already Have an Account ?</a>
+    </div>
+
+    <script>
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          var username = document.getElementById("username").value;
+          var password = document.getElementById("password").value;
+          var confirm = document.getElementById("confirm").value;
+
+          var messageDiv = document.getElementById("message");
+          messageDiv.innerHTML = ""; // Clear previous messages
+          fetch("https://projectdatabaseforimdb.onrender.com/comments")
+            .then((value) => value.json())
+            .then((result) => {
+              for (objArr of result) {
+                if (username == objArr.username) {
+                  messageDiv.innerHTML =
+                    "Username already Exists ! ! !";
+                  messageDiv.style.color = "red";
+                  break;
+                } else {
+                  if (password === confirm) {
+                    fetch(
+                      "https://projectdatabaseforimdb.onrender.com/comments",
+                      {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                          username: username,
+                          password: password,
+                        }),
+                      }
+                    )
+                      .then((response) => {
+                        if (response.ok) {
+                          return response.json();
+                        } else {
+                          throw new Error("Failed to create account");
+                        }
+                      })
+                      .then((data) => {
+                        // Handle success response
+                        messageDiv.innerHTML = "Account created successfully!";
+                        messageDiv.style.color = "green";
+                        setTimeout(() => {
+                          window.open("./login.html", "_self");
+                        }, 1000);
+                      })
+                      .catch((error) => {
+                        console.error("Error:", error);
+                        messageDiv.innerText =
+                          "An error occurred. Please try again.";
+                        messageDiv.style.color = "red";
+                      });
+                  } else {
+                    messageDiv.innerHTML =
+                      "Passwords do not match. Please try again.";
+                    messageDiv.style.color = "red";
+                  }
+                  break;
+                }
+              }
+            });
+        });
+    </script>
+  </body>
+
+  <!-- <body>
+    <div class="login-container">
+      <div
+        style="
+          margin-bottom: 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 10px;
+        "
+      >
+        <img src="./logo.png" style="width: 45px" />
+        <h2>Create Account</h2>
+      </div>
+      <form id="loginForm">
+        <label for="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          required
+          minlength="10"
+          maxlength="20"
+          autofocus
+        /><br /><br />
+        <label for="password">New Password :</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          minlength="8"
+        /><br /><br />
+        <label for="confirm">Confirm Password :</label>
+        <input
+          type="password"
+          id="confirm"
+          name="confirm"
+          required
+        /><br /><br />
+        <div id="message"></div>
+        <input type="submit" value="Submit" />
+      </form>
+      <a href="./login.html" id="newAccount">Already Have an Account ?</a>
+    </div>
+
+    <script>
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          var username = document.getElementById("username").value;
+          var password = document.getElementById("password").value;
+          var confirm = document.getElementById("confirm").value;
+          if (password == confirm) {
+            fetch("https://projectdatabaseforimdb.onrender.com/comments", {
+              method: "post",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                username: username,
+                password: password,
+              }),
+            })
+              .then((response) => response.json())
+              .catch((error) => {
+                console.error("Error:", error);
+                document.getElementById("message").innerText =
+                  "An error occurred";
+              });
+            window.open("./login.html", "_self");
+          } else {
+            let msg = document.getElementById("message");
+            msg.innerHTML = "Enter Correct Password";
+            msg.style.color = "red";
+          }
+        });
+    </script>
+  </body> -->
+</html>

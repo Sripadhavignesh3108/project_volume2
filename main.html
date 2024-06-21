@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IMDB Clone-Project</title>
+    <link rel="shortcut icon" href="./star.png" type="image/x-icon">
+    <link rel="stylesheet" href="./main.css" />
+  </head>
+
+  <body>
+    <div id="searchData">
+      <img src="./close.png" id="cancel" />
+    </div>
+    <div id="menuData">
+      <img src="./delete.png" id="cancelMenu" />
+      <p><a>Home</a></p>
+      <p><a href="./login.html" target="_self">Log-In / Sign-In</a></p>
+      <p><a href="./index.html" target="_self">Create Account</a></p>
+      <p><a href="./favorite.html" target="_self">Favorites</a></p>
+      <p><a href="./topMovies.html">Top-100 Movies</a></p>
+      <p><a href="./data2.html">Explore New Movies</a></p>
+      <p>Top-Pick Of the Week</p>
+      <p>
+        <a href="https://help.imdb.com/imdb " target="_blank">Help Center</a>
+      </p>
+      <p><a href=""></a></p>
+      <div id="socialPlatform">
+          <a href="https://www.youtube.com/imdb" target="_blank"><ion-icon name="logo-youtube" class="youtube"></ion-icon></a>
+          <a href="https://x.com/IMDb" target="_blank"><ion-icon name="logo-twitter" class="twitter"></ion-icon></a>
+          <a href="https://www.instagram.com/imdb/" target="_blank"><ion-icon name="logo-instagram" class="insta"></ion-icon></a>
+          <a href="https://github.com/imdb" target="_blank"><ion-icon name="logo-github" class="github"></ion-icon></a>
+          <a href="https://www.linkedin.com/company/imdb-com/" target="_blank"><ion-icon name="logo-linkedin" class="linkedin"></ion-icon></a>
+      </div>
+    </div>
+    <nav>
+      <img src="./logo.png" alt="logo" id="logo" />
+      <div style="display: flex; align-items: center" id="menuBar">
+        <img src="./menu.png" alt="hm" width="23px" />
+        <h4 style="margin-left: 5px; font-size: 14px">MENU</h4>
+      </div>
+
+      <form id="searDiv" onsubmit="searchData()">
+        <input type="text" name="search" id="search" />
+        <button style="background: none; border: none">
+          <img src="./video.png" alt="search" id="searchImg" />
+        </button>
+      </form>
+
+      <a
+        href="./favorite.html"
+        style="text-decoration: none; color: white"
+        id="fav"
+      >
+        <div
+          style="display: flex; align-items: center; transition: all ease 0.3s"
+          id="favDiv"
+        >
+          <img
+            src="./favorite.png"
+            alt="hm"
+            width="28px"
+            height="33px"
+            style="margin: 3px 0px 0px 0vw"
+          />
+          <h4 style="margin-left: 2px; font-size: 14px">FAVORITES</h4>
+        </div>
+      </a>
+
+      <div style="display: flex; align-items: center">
+        <a href="./login.html" style="text-decoration: none">
+          <h4 id="logIn">LOG-IN</h4>
+        </a>
+        <h4 style="margin-left: 15px" id="hash">|</h4>
+        <a href="./index.html" style="text-decoration: none">
+          <h4 style="margin-left: 15px" id="reg">REGISTER</h4>
+        </a>
+      </div>
+    </nav>
+
+    <header>
+      <div id="carosuel">
+        <div id="slide">
+          <img
+            src="https://images.hdqwalls.com/wallpapers/vikings-2021-6l.jpg"
+            alt="got"
+            class="caro"
+          />
+          <img
+            src="https://th.bing.com/th/id/R.a8f227c108c7ecfdd51ef599b8804b08?rik=X4P9mdXNFOi6%2fA&riu=http%3a%2f%2fwww.impawards.com%2f2021%2fposters%2fgodzilla_vs_kong_ver19_xxlg.jpg&ehk=kyJ4a0zaaSYZ5WCbe%2fAJlJEYyBZ512dGMq5shLqkruw%3d&risl=&pid=ImgRaw&r=0"
+            alt="kongvsgodzilla"
+            class="caro"
+          />
+          <img
+            src="https://images.alphacoders.com/111/1119553.jpg"
+            alt="avenger"
+            class="caro"
+          />
+          <img
+            src="https://s-media-cache-ak0.pinimg.com/originals/e0/56/16/e056165b0f48891f1a99a3470f0d2bce.jpg"
+            alt="got"
+            class="caro"
+          />
+        </div>
+      </div>
+      <div id="movieDiv">
+        <p id="new">Explore Movies & TV shows</p>
+        <div class="topH">
+        <a href="./data2.html" style="text-decoration: none; color: white">
+          <div id="movieInfo"></div>
+        </a>
+      </div>
+      </div>
+    </header>
+
+    <div id="whatToWatch">
+      <p id="watch">What to watch</p>
+      <a href="./data2.html" style="text-decoration: none; color: white">
+        <div class="topPick">
+          <p>Top pick of the Week</p>
+          <img src="./right-arrow.png" alt="arrow image" style="width: 25px" />
+        </div>
+      </a>
+      <div id="watchList"></div>
+    </div>
+
+    <div id="bottom">
+      <div id="top100">
+        <div class="topPick">
+          <p>Top 100 IMDB-Movies</p>
+          <img src="./right-arrow.png" alt="arrow image" style="width: 25px" />
+        </div>
+        <div id="topImg"></div>
+        <p id="details">Top 100 Highest IMDB Rated Movies</p>
+        <a href="./topMovies.html" id="listButton">
+          <img
+            src="./menu.png"
+            alt="hm"
+            width="20px"
+            style="margin-left: 1.5vw"
+          />
+          <span style="font-size: 18px; transition: all ease 0.1s"
+            >Movie List</span
+          >
+        </a>
+      </div>
+      <div id="favoriteDiv">
+        <div class="topPick">
+          <p>Your Wishlist <img src="./star.png" style="width: 20px" /></p>
+          <img src="./right-arrow.png" alt="arrow image" style="width: 25px" />
+        </div>
+        <iframe src="./favoriteInDiv.html" id="iframe"></iframe>
+      </div>
+    </div>
+
+    <footer>
+      <p id="noteForBottom">You have reached bottom of the Page</p>
+      <a href="./index.html">
+        <button id="accessButton"><b>Sign in for more access</b></button></a
+      >
+    </div>
+    <div id="bottomBox">
+      <div id="bottomLeft">
+        <h2>Follow IMDb on social</h2>
+        <div id="socialMedia">
+          <a href="https://www.youtube.com/imdb" target="_blank"><ion-icon name="logo-youtube" class="youtube"></ion-icon></a>
+          <a href="https://x.com/IMDb" target="_blank"><ion-icon name="logo-twitter" class="twitter"></ion-icon></a>
+          <a href="https://www.instagram.com/imdb/" target="_blank"><ion-icon name="logo-instagram" class="insta"></ion-icon></a>
+          <a href="https://github.com/imdb" target="_blank"><ion-icon name="logo-github" class="github"></ion-icon></a>
+          <a href="https://www.linkedin.com/company/imdb-com/" target="_blank"><ion-icon name="logo-linkedin" class="linkedin"></ion-icon></a>
+        </div>
+      </div>
+      <div id="bottomRight">
+        <div>
+          <h2>Get the IMDb app</h2>
+          <p>For Android and iOS</p>
+        </div>
+        <a
+          href="https://apps.apple.com/us/app/imdb-movies-tv-shows/id342792525?_branch_match_id=1329063813278929688&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXL86pTNJLLCjQy8nMy9Z3TLQ0S%2FZJdkp1TAIA2i8HXSEAAAA%3D&utm_campaign=DesktopQRCodeFooter-Click&utm_medium=marketing&utm_source=Desktop"
+          ><img src="./qrcode.png" alt="QRcode" />
+        </a>
+      </div>
+    </div>
+    <div id="bottomData1">
+      <p>Help</p>
+      <p>Site Index</p>
+      <p>IMDBpro</p>
+      <p>Box Office Mojo</p>
+      <p>License IMDB Data</p>
+    </div>
+    <div id="bottomData2">
+      <p>Press Room</p>
+      <p>Advertising</p>
+      <p>Jobs</p>
+      <p>Conditions of Use</p>
+      <p>Privacy Policy</p>
+      <p>Your Ads Privacy Choices</p>
+    </div>
+      <div style="display: flex; justify-content: center; align-items: center;padding: -40px 0px 0px -20px;">
+        <p style="position: relative;left: 25px;top: -5px;">An</p>
+      </p>
+              <img src="./amazon-pay.png" width="90"/>
+        <span style="position: relative;left: 5px;top: -5px;">Company</span>
+    </footer>
+    <script src="./main.js"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>

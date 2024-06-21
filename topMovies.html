@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Jacquard+12&display=swap");
+      body {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        row-gap: 40px;
+        column-gap: 20px;
+        background-color: black;
+        color: white;
+        font-family: "Cantarell", sans-serif;
+      }
+      ::-webkit-scrollbar {
+        background-color: rgb(72, 72, 72);
+        width: 8px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: rgb(134, 134, 134);
+        border-radius: 2px;
+      }
+      .div {
+        border: 1px solid grey;
+        border-radius: 3px;
+        height: 400px;
+        width: 220px;
+        display: grid;
+        font-family: "Cantarell", sans-serif;
+        overflow-y: hidden;
+        transition: all ease 0.2s;
+        background-color: rgba(79, 77, 77, 0.285);
+      }
+      .div:hover{
+        scale: 1.05;
+      }
+      .p {
+        margin-top: 5px;
+        font-size: 17px;
+        text-align: center;
+      }
+      img {
+        width: 220px;
+        height: 300px;
+        border-radius: 3px 3px 0px 0px;
+      }
+      .save {
+        width: 40px;
+        height: 45px;
+        position: absolute;
+        margin: -2px;
+        cursor: pointer;
+        transition: all ease 0.45s;
+      }
+      .save:hover {
+        scale: 1.2;
+      }
+      .genre {
+        color: rgba(203, 203, 203, 0.466);
+        font-size: 13px;
+        text-align: center;
+        position: relative;
+        top: -24px;
+      }
+      .rateDiv {
+        margin-top: -40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        /* border: 1px solid white; */
+      }
+      #newData{
+        width: 100%;
+        text-align: center;
+        margin: 0px 35px 0px 35px;
+        color: gold;
+        padding-top: 15px;
+        /* background-color: rgba(173, 172, 172, 0.073); */
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="newData">Top 100 IMDB-rated Movies</h1>
+
+    <script>
+      let data = fetch("https://projectdatabaseforimdb.onrender.com/imdb", {
+        method: "get",
+        headers: { "Content-Type": "application/json" },
+      });
+      data.then((e) => {
+        e.json().then((e) => {
+          let res = e;
+          for (i in res) {
+            let div = document.createElement("div");
+            div.setAttribute("class", "div");
+            div.setAttribute("id",res[i].id)
+            document.body.appendChild(div);
+          
+            let img = document.createElement("img");
+            img.setAttribute("src", `${res[i].image}`);
+            img.setAttribute("alt","images")
+            div.appendChild(img);
+
+            let p = document.createElement("p");
+            p.setAttribute("class", "p");
+            p.innerHTML = res[i].title;
+            div.appendChild(p);
+
+            let save = document.createElement("img");
+            save.setAttribute("class", "save");
+            save.addEventListener("click", (e) => {
+              saveData =div.getAttributeNode("id");
+              saveToLocalStorage(saveData.value)
+              
+              save.setAttribute("src", "./love.png");
+              save.style.width = "25px";
+              save.style.height = "25px";
+              save.style.margin = "5px 0px 0px 5px";
+              save.style.scale="1"
+            });
+            div.appendChild(save);
+            save.setAttribute("src", "./save.png");
+
+            let genre = document.createElement("p");
+            genre.setAttribute("class", "genre");
+            genre.innerHTML = res[i].genre;
+            div.appendChild(genre);
+
+            let rateDiv = document.createElement("div");
+            rateDiv.setAttribute("class", "rateDiv");
+            div.appendChild(rateDiv);
+
+            let star = document.createElement("img");
+            star.setAttribute("src", "./star.png");
+            star.style.width = "20px";
+            star.style.height = "20px";
+            rateDiv.appendChild(star);
+
+            let rate = document.createElement("p");
+            rate.innerHTML = res[i].rating+ " /10";
+            rateDiv.appendChild(rate);
+          }
+        });
+      }); 
+      // document.addEventListener("DOMContentLoaded", deleteItem);
+      // function deleteItem()
+      // {
+      //     localStorage.clear();
+      // }
+
+      storedData;
+      function saveToLocalStorage(item) {
+        storedData = JSON.parse(localStorage.getItem('selectedItems')) || [];
+        storedData.push(item);
+        localStorage.setItem('selectedItems', JSON.stringify(storedData));
+      }
+      </script>
+  </body>
+</html>

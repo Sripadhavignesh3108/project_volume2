@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Results</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Jacquard+12&display=swap");
+      body {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        row-gap: 40px;
+        column-gap: 20px;
+        background-color: black;
+        color: white;
+        font-family: "Cantarell", sans-serif;
+      }
+      ::-webkit-scrollbar {
+        background-color: rgb(72, 72, 72);
+        width: 8px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: rgb(134, 134, 134);
+        border-radius: 2px;
+      }
+      .div {
+        border: 1px solid grey;
+        border-radius: 3px;
+        height: 400px;
+        width: 220px;
+        display: grid;
+        font-family: "Cantarell", sans-serif;
+        overflow-y: hidden;
+        transition: all ease 0.2s;
+        background-color: rgba(79, 77, 77, 0.285);
+      }
+      .div:hover {
+        scale: 1.05;
+      }
+      .p {
+        margin-top: 5px;
+        font-size: 17px;
+        text-align: center;
+      }
+      img {
+        width: 220px;
+        height: 300px;
+        border-radius: 3px 3px 0px 0px;
+      }
+      .save {
+        width: 40px;
+        height: 45px;
+        position: absolute;
+        margin: -2px;
+        cursor: pointer;
+        transition: all ease 0.45s;
+      }
+      .save:hover {
+        scale: 1.2;
+      }
+      .genre {
+        color: rgba(203, 203, 203, 0.466);
+        font-size: 13px;
+        text-align: center;
+        position: relative;
+        top: -24px;
+      }
+      .rateDiv {
+        margin-top: -40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+      }
+      #newData {
+        width: 100%;
+        text-align: center;
+        margin: 0px 35px 0px 35px;
+        color: gold;
+        padding-top: 15px;
+      }
+      #msgImg {
+        width: 120px;
+        height: 120px;
+        animation: load 2s;
+      }
+      #msg {
+        font-family: "Cantarell", sans-serif;
+        font-size: 27px;
+        color: rgb(178, 0, 0);
+      }
+      @keyframes load {
+        0% {
+          scale: 0;
+        }
+        60% {
+          scale: 1.5;
+        }
+      }
+      #DivContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        margin-top: 50px;
+      }
+      #cancel {
+        position: absolute;
+        right: 0px;
+        padding: 20px;
+        width: 25px;
+        height: 25px;
+        margin-right: 20px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="newData">Search Results</h1>
+    <img src="./close.png" id="cancel" />
+    <script>
+      let data = fetch("https://projectdatabaseforimdb.onrender.com/search", {
+        method: "get",
+        headers: { "Content-Type": "application/json" },
+      });
+      data.then((e) => {
+        e.json().then((e) => {
+          let res = e.map((data) => {
+            data.title = data.title.toLowerCase();
+            return data;
+          });
+
+          searchData = localStorage.getItem("searchData");
+          let info = res.filter(
+            (num) =>
+              num.title.includes(searchData.toLowerCase()) ||
+              num.title.replaceAll(" ", "").includes(searchData.toLowerCase())
+          );
+          if (info.length == 0 || searchData == "") {
+            let div = document.createElement("div");
+            div.setAttribute("id", "DivContainer");
+            document.body.appendChild(div);
+
+            let img = document.createElement("img");
+            img.setAttribute("id", "msgImg");
+            img.setAttribute(
+              "src",
+              "https://cdn-icons-png.flaticon.com/128/755/755014.png"
+            );
+            div.appendChild(img);
+            if (searchData == "") {
+              let msg = document.createElement("p");
+              msg.setAttribute("id", "msg");
+              msg.innerHTML = `Please Enter Something !`;
+              div.appendChild(msg);
+            } else {
+              let msg = document.createElement("p");
+              msg.setAttribute("id", "msg");
+              msg.innerHTML = `Sorry, No result Match For " ${searchData} "`;
+              div.appendChild(msg);
+            }
+          } else {
+            for (i in info) {
+              let div = document.createElement("div");
+              div.setAttribute("class", "div");
+              div.setAttribute("id", info[i].id);
+              document.body.appendChild(div);
+              // console.log(div);
+
+              let img = document.createElement("img");
+              img.setAttribute("src", `${info[i].image}`);
+              div.appendChild(img);
+
+              let p = document.createElement("p");
+              p.setAttribute("class", "p");
+              p.innerHTML = info[i].title;
+              div.appendChild(p);
+
+              let save = document.createElement("img");
+              save.setAttribute("class", "save");
+
+              save.addEventListener("click", (e) => {
+                e.preventDefault();
+                favData = div.getAttributeNode("id").value;
+                saveToLocalStorage(favData);
+              
+                save.setAttribute("src", "./love.png");
+                save.style.width = "25px";
+                save.style.height = "25px";
+                save.style.margin = "5px 0px 0px 5px";
+                save.style.scale = "1";
+              });
+              div.appendChild(save);
+              save.setAttribute("src", "./save.png");
+
+              let genre = document.createElement("p");
+              genre.setAttribute("class", "genre");
+              genre.innerHTML = info[i].genre;
+              div.appendChild(genre);
+
+              let rateDiv = document.createElement("div");
+              rateDiv.setAttribute("class", "rateDiv");
+              div.appendChild(rateDiv);
+
+              let star = document.createElement("img");
+              star.setAttribute("src", "./star.png");
+              star.style.width = "20px";
+              star.style.height = "20px";
+              rateDiv.appendChild(star);
+
+              let rate = document.createElement("p");
+              rate.innerHTML = info[i].rating + " /10";
+              rateDiv.appendChild(rate);
+            }
+          }
+        });
+      });
+      document.getElementById("cancel").addEventListener("click", () => {
+        window.history.back();
+      });
+
+      let storedData;
+      function saveToLocalStorage(item) {
+       let localStorageData = JSON.parse(localStorage.getItem("selectedItems")) || [];
+       localStorageData.push(item)
+       localStorage.setItem("selectedItems",JSON.stringify(localStorageData))
+      }
+    </script>
+  </body>
+</html>

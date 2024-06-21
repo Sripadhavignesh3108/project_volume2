@@ -1,0 +1,800 @@
+@import url("https://fonts.googleapis.com/css2?family=Jacquard+12&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+}
+#searchImg {
+  width: 26px;
+  height: 26px;
+}
+body {
+  background-color: black;
+  color: white;
+  font-family: "Cantarell", sans-serif;
+}
+body::-webkit-scrollbar {
+  background-color: rgb(72, 72, 72);
+  width: 8px;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: rgb(134, 134, 134);
+  border-radius: 2px;
+}
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 50px;
+  padding-left: 15px;
+  padding-bottom: 5px;
+  margin-top: 10px;
+}
+#logo {
+  width: 70px;
+  cursor: pointer;
+}
+
+#search {
+  width: 94%;
+  height: 24px;
+  border-style: none;
+  font-size: 17px;
+  outline: none;
+  padding-left: 10px;
+}
+#searDiv {
+  display: flex;
+  height: 30px;
+  width: 55vw;
+  align-items: center;
+  background-color: white;
+  /* margin-left: 2vw; */
+  /* gap: 10px; */
+  padding: 2px;
+  border-radius: 5px;
+  z-index: 1;
+}
+#logIn {
+  font-size: 14px;
+  color: white;
+  transition: all ease 0.3s;
+  cursor: pointer;
+}
+#logIn:hover {
+  color: rgb(50, 197, 255);
+  scale: 1.2;
+}
+#reg {
+  font-size: 14px;
+  color: white;
+  transition: all ease 0.3s;
+  cursor: pointer;
+}
+#reg:hover {
+  color: rgb(50, 197, 255);
+  scale: 1.2;
+}
+#menuBar {
+  transition: all ease 0.3s;
+  cursor: pointer;
+}
+#menuBar:hover {
+  color: rgb(50, 197, 255);
+  scale: 1.2;
+}
+header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 10px;
+  margin-top: 5px;
+}
+#carosuel {
+  width: 60vw;
+  height: 500px;
+  background-color: white;
+  border: 1px solid rgba(76, 75, 51, 0.735);
+  border-radius: 2px;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+}
+#slide {
+  scroll-snap-type: x mandatory;
+  display: flex;
+  height: 100%;
+  animation: car 20s cubic-bezier(0.075, 0.82, 0.165, 1) 0.8s infinite;
+}
+#slide:hover {
+  animation: none;
+}
+#genreInWatch {
+  color: rgba(240, 240, 240, 0.45);
+  font-size: 13px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+#carosuel::-webkit-scrollbar {
+  display: none;
+}
+.caro {
+  height: 100%;
+  width: 100%;
+  scroll-snap-align: start;
+}
+.topH {
+  height: 452px;
+  width: 420px;
+  border: 1px solid rgba(255, 255, 255, 0.148);
+  border-radius: 5px;
+  overflow-y: scroll;
+}
+.topH::-webkit-scrollbar {
+  display: none;
+}
+#new {
+  font-size: 23px;
+  text-align: center;
+  color: gold;
+  padding: 10px;
+  background-color: rgba(173, 172, 172, 0.073);
+}
+#imgInDiv {
+  width: 110px;
+  margin-left: 5px;
+}
+#card {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  display: flex;
+  cursor: pointer;
+  transition: all ease 0.5s;
+}
+#card:hover {
+  background: linear-gradient(
+    rgba(150, 148, 148, 0.283),
+    rgba(54, 54, 54, 0.26)
+  );
+}
+
+.rateDiv {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#watch {
+  font-size: 38px;
+  font-weight: 600;
+  margin: 30px 35px -10px 20px;
+  color: gold;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  /* background-color: rgba(173, 172, 172, 0.073); */
+}
+.topPick {
+  border-left: 7px solid gold;
+  display: flex;
+  align-items: center;
+  font-size: 25px;
+  padding: 10px;
+  gap: 5px;
+  margin: 10px 0px 0px 20px;
+}
+#watchList {
+  display: flex;
+  overflow-x: scroll;
+  width: 97vw;
+  gap: 20px;
+  margin: 30px 0px 0px 10px;
+}
+#watchList::-webkit-scrollbar {
+  display: none;
+}
+#card2 {
+  /* border: 1px solid rgba(240, 240, 240, 0.45); */
+  border-radius: 4px;
+  background-color: rgba(103, 101, 101, 0.208);
+  padding: 10px;
+  width: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+#bottom {
+  margin-top: 60px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  overflow: hidden;
+}
+
+#iframe{
+  width: 550px;
+  height: 350px;
+  margin-left: 20px;
+  margin-top: 10px;
+  border: none;
+}
+#favoriteDiv{
+  background-color: rgba(103, 101, 101, 0.208);
+  width: 600px;
+}
+#top100 {
+  width: 580px;
+  background-color: rgba(201, 201, 201, 0.116);
+  border-radius: 3px;
+  margin-left: 3px;
+  padding: 5px;
+}
+#topImg {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 20px 0px 0px 20px;
+}
+#top100Img {
+  width: 180px;
+}
+#details {
+  font-size: 24px;
+  color: rgba(203, 202, 202, 0.71);
+  margin-left: 20px;
+  margin-top: 8px;
+}
+#listButton {
+  margin-top: 8px;
+  margin-left: 4px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  color: rgb(1, 183, 255);
+}
+#listButton > span:hover {
+  color: rgb(255, 191, 0);
+}
+#searchData {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: -100vh;
+  background-color: rgba(0, 0, 0, 0.986);
+  z-index: 1;
+  transition: all ease 0.7s;
+}
+#card3 {
+  color: gold;
+  font-size: 19px;
+  text-align: center;
+}
+#cancel {
+  float: right;
+  padding: 20px;
+  width: 25px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+#favDiv {
+  transition: all ease 0.5;
+}
+#favDiv:hover {
+  color: rgb(50, 197, 255);
+  scale: 1.2;
+}
+#syno {
+  font-size: 12px;
+}
+#movieName {
+  font-size: 20px;
+}
+#menuData {
+  /* border: 2px solid white; */
+  width: 320px;
+  height: 100vh;
+  position: absolute;
+  top: 0px;
+  background-color: black;
+  z-index: 2;
+  transform: translateX(-320px);
+  transition: all ease 0.5s;
+}
+#cancelMenu{
+  width: 50px;
+  float: right;
+  transition: all ease 0.5s;
+}
+
+#menuData > p{
+  /* border: 1px solid white; */
+  padding: 12px;
+  margin-bottom: 5px;
+  padding-left: 15px;
+  font-size: 18px;
+  transition: all ease 0.2s;
+}
+#menuData > p:hover{
+  background-color: rgba(142, 142, 142, 0.265);
+}
+#menuData > p >a{
+  color: white;
+  text-decoration: none;
+}
+#socialPlatform{
+  /* border: 1px solid white; */
+  padding: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  width: 90%;
+  position: absolute;
+  bottom: 10px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+#socialPlatform a{
+  text-decoration: none;
+  color: white;
+}
+#socialPlatform  ion-icon{
+  font-size: 25px;
+  transition: all ease 0.3s;
+  cursor:grab;
+}
+.youtube:hover{
+  color: rgb(211, 4, 4);
+  scale: 1.3;
+}
+.twitter:hover{
+  color: rgb(0, 183, 255);
+  scale: 1.3;
+}
+.linkedin:hover{
+  color: rgb(0, 140, 255);
+  scale: 1.2;
+}
+.insta:hover{
+  color: rgb(255, 7, 110);
+  scale: 1.2;
+}
+.github:hover{
+  scale: 1.3;
+  color:rgb(162, 136, 255);
+}
+#accessButton{
+  width: 200px;
+  height: 38px;
+  background-color: gold;
+  border-radius: 5px;
+  margin: 20px 0px 0px 50%;
+  transform: translateX(-50%);
+  font-size: 15px;
+  border: 0px;
+  cursor: pointer;
+}
+#noteForBottom{
+  text-align: center;
+  font-size: 18px;
+  margin-top: 70px;
+}
+#bottomLeft{
+  border: 2px solid rgba(124, 124, 124, 0.336);
+  border-radius: 10px;
+  width: 420px;
+  height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+#socialMedia{
+  /* border: 2px solid white; */
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+#bottomLeft > h2{
+  text-align: center;
+}
+#socialMedia a{
+  color: white;
+  text-decoration: none;
+}
+#socialMedia ion-icon{
+  font-size: 23px;
+  transition: all ease 0.2s;
+}
+#bottomRight{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(124, 124, 124, 0.336);
+  border-radius: 10px;
+  width: 420px;
+  height: 110px;
+}
+#bottomRight img{
+  width: 80px;
+  transition: all ease 0.3s;
+}
+#bottomRight img:hover{
+  scale: 1.1;
+}
+#bottomRight div{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 80px;
+  width: 300px;
+}
+
+#bottomBox{
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+#bottomData1{
+  margin-top: 20px;
+  padding: 12px;
+  font-size: 17px;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+#bottomData2{
+  padding: 12px;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+  }
+   #bottomData2>p,#bottomData1 > p{
+    transition: all ease 0.3s;
+   }
+  #bottomData2 > p:hover,#bottomData1 > p:hover{
+    color: gold;
+    scale: 1.1;
+  }
+/* MEDIA QUERIES FOR RESPONSIVENESS */
+/* +===========================================+ */
+
+/* From 800px to 1100px*/
+/* +===========================================+ */
+@media screen and (min-width:1200px) and (max-width:1300px) {
+  @keyframes car {
+      0% {
+        transform: translateX(0px);
+      }
+  
+      25% {
+        transform: translateX(-760px);
+      }
+  
+      50% {
+        transform: translateX(-1525px);
+      }
+  
+      90% {
+        transform: translateX(-2290px);
+      }
+    }
+}
+@media screen and (min-width: 800px) and (max-width: 1100px) {
+  #carosuel {
+    width: 78vw;
+    height: 450px;
+  }
+    @keyframes car {
+    0%{
+      transform: translateX(0px);
+    }
+    25%{
+      transform: translateX(-760px);
+    }
+    50%{
+      transform: translateX(-1525px);
+    }
+    90%{
+      transform: translateX(-2290px);
+    }
+  }
+  #reg {
+    display: none;
+  }
+  #hash {
+    display: none;
+  }
+  #new {
+    font-size: 34px;
+    padding: 18px;    
+  }
+  #movieDiv{
+    margin-top: 30px;
+  }
+  #movieInfo {
+    height: 650px;
+  }
+  .topH {
+    width: 80vw;
+    height: 730px;
+  }
+  #imgInDiv {
+    width: 150px;
+  }
+  #syno {
+    width: 50vw;
+    font-size: 18px;
+    color: whitesmoke;
+  }
+  #movieName {
+    font-size: 25px;
+    margin-bottom: 15px;
+  }
+}
+/* #top100{
+    margin-left: 50%;
+    transform: translateX(-50%);
+  } */
+
+/*From 650px to 750px MEDIA QUERIES*/
+/* +===========================================+ */
+
+@media screen and (min-width: 600px) and (max-width: 799px) {
+  #carosuel {
+    width: 80vw;
+    height: 360px;
+    margin-bottom: 20px;
+  }
+  nav {
+    display: flex;
+    margin-left: -60px;
+  }
+  #searDiv {
+    margin-left: -40px;
+    width: 70vw;
+  }
+  #menuBar {
+    position: absolute;
+    right: 3vw;
+  }
+  #logIn,
+  #reg,
+  #hash,
+  #favDiv,
+  #fav {
+    display: none;
+  }
+  #new {
+    font-size: 30px;
+    padding: 17px;
+  }
+  #movieInfo {
+    height: 92%;
+  }
+  .topH {
+    width: 80vw;
+    height: 600px;
+    /* margin-top: 20px; */
+  }
+  #imgInDiv {
+    width: 120px;
+  }
+  #syno {
+    width: 50vw;
+    font-size: 14px;
+    color: whitesmoke;
+  }
+  #movieName {
+    font-size: 20px;
+    margin-bottom: 7px;
+    margin-top: 5px;
+  }
+  #card2 {
+    width: 150px;
+  }
+  #topImg{
+    width: 600px;
+  }
+}
+/* +=========================================================================================+ */
+@media screen and (min-width: 425px) and (max-width: 599px) {
+  #carosuel {
+    width: 90vw;
+    height: 45vh;
+    margin-bottom: 20px;
+  }
+  #logo {
+    width: 50px;
+  }
+  nav {
+    display: flex;
+    margin-left: -60px;
+    margin-top: 5px;
+  }
+  #searDiv {
+    margin-left: -40px;
+    width: 62vw;
+    height: 22px;
+  }
+  #searchImg {
+    width: 20px;
+    height: 20px;
+  }
+  #menuBar {
+    position: absolute;
+    right: 3vw;
+  }
+  #logIn,
+  #reg,
+  #hash,
+  #favDiv,
+  #fav {
+    display: none;
+  }
+  #new {
+    font-size: 25px;
+    padding: 8px;
+  }
+  #movieInfo {
+    height: 92%;
+  }
+  #topH {
+    width: 90vw;
+    height: 500px;
+    margin-top: 20px;
+  }
+  #card {
+    height: 150px;
+  }
+  #imgInDiv {
+    width: 100px;
+    height: 150px;
+  }
+  #syno {
+    width: 60vw;
+    font-size: 12px;
+    color: whitesmoke;
+  }
+  #movieName {
+    font-size: 17px;
+    margin-bottom: 2px;
+    margin-top: 5px;
+  }
+  #card2 {
+    width: 120px;
+  }
+  #top100 {
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+  #genreInWatch {
+    font-size: 10px;
+  }
+  #top100Img {
+    width: 120px;
+  }
+  #top100 {
+    display: none;
+  }
+  #topPick {
+    margin-left: 0px;
+  }
+  #details {
+    font-size: 22px;
+    margin: 20px 0px 0px 10px;
+  }
+  #topImg {
+    width: 100%;
+    margin-left: 5px;
+  }
+  #listButton {
+    margin: 10px 0px 15px 5px;
+  }
+  #iframe{
+    width: 90%;
+  }
+}
+
+@media screen and (min-width:320px) and (max-width:420px) {
+  #logIn , #reg , #hash , #fav , #movieDiv{
+    display: none;
+  }
+   #menuBar{
+   position: absolute;
+   right: 10px;
+   margin-left: 5px;
+  }
+  #logo{
+    width: 35px;
+    margin-left: -58px;
+  }
+  nav{
+  margin-top: 0px;
+  }
+  #searDiv{
+    position: relative;
+    right: -10px;
+    width: 55vw;
+    height: 18px;
+    margin-left: -55px;
+  }
+  #search{
+  height: 18px;
+  }
+  #searchImg{
+    width: 16px;
+    height: 16px;
+    margin-right: 2px;
+  }
+  #menuData{
+  width: 250px;
+  }
+
+  #carosuel{
+  margin-top: -15px;
+  width: 90vw;
+  height: 180px;
+  }
+  #watch{
+    font-size: 28px;
+    margin-top: 5px;
+  }
+  .topPick{
+    font-size: 20px;
+    height: 17px;
+    margin-top: 2px;
+  }
+  #watchList{
+    gap: 5px;
+    margin-top: 10px;
+  }
+  #card2{
+    width: 120px;
+    height: 240px;
+  }
+  #card3{
+    font-size: 13px;
+  }
+  #genreInWatch{
+    font-size: 10px;
+  }
+  #top100{
+    height: 280px;
+  }
+  #top100Img{
+    width: 90px;
+  }
+  #details{
+    font-size: 20px;
+  }
+  #listButton img{
+    width: 18px;
+  }
+  #listButton{
+    margin-left: 15px;
+  }
+  #favoriteDiv{
+    height: 300px;
+  }
+  #iframe{
+    width: 100%;
+    height: 100%;
+  }
+  #bottomRight{
+    width: 300px;
+  }
+  #bottomLeft{
+    width: 300px;
+  }
+  #bottomBox{
+    width: 100%;
+    gap: 5px;
+  }
+}
+
